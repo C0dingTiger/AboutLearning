@@ -1,0 +1,18 @@
+gzip：压缩文件，但是只针对单个文件，不能多个
+ 	-压缩后会删除源文件生成 .gz压缩包
+gunzip:解压gzip压缩包
+
+
+bzip2/bunzip2：用法同上， 压缩文件为 .bz2 格式
+
+tar：（最为广泛应用） 同上，但是tar可以压缩多个文件或者目录
+	  压缩后源文件还存在
+	-c: compress
+	-x: extract
+	-z:使用gzip 
+	-j:使用bzip2
+	-f:指定处理文件
+	-v:显示压缩过程详细信息
+	-C:指定解压后存放文件的目录
+  
+  eg： 解压： $tar -zxvf **.tar.gz  -C /tmp

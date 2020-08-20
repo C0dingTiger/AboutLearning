@@ -1,0 +1,3 @@
+difference: => vs ->
+  =>:is used as an access mechanism for arrays
+  ->: used in object scope to access methods or properties of an object.

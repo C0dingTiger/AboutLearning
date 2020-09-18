@@ -1,0 +1,34 @@
+JSON 或者 JavaScript 对象表示法是一种轻量级的基于文本的开放标准，被设计用于可读的数据交换。约定使用 JSON 的程序包括 C，C++，Java，Python，Perl 等等。
+    JSON 是 JavaScript Object Notation 的缩写。
+    这个格式由 Douglas Crockford 提出。
+    被设计用于可读的数据交换。
+    它是从 JavaScript 脚本语言中演变而来。
+    文件名扩展是 .json。
+    JSON 的网络媒体类型是 application/json。
+    统一标示符类型（Uniform Type Identifier）是 public.json。
+
+JSON 使用范围：
+    用于编写基于 JavaScript 应用程序，包括浏览器扩展和网站。
+    JSON 格式可以用于通过网络连接序列化和传输结构化数据。
+    主要用于在服务器和 Web 应用程序之间传输数据。
+    Web 服务和 APIs 可以使用 JSON 格式提供公用数据。
+    还可以用于现代编程语言中。
+
+JSON 语法规则：
+JSON 语法是 JavaScript 对象表示法语法的子集。
+JSON 语法规则不复杂，它参考了 C 语言家族的一些习惯，学习起来并不会感到陌生。
+    数据在名称/值对中
+    数据由逗号分隔
+    花括号保存对象
+    方括号保存数组
+
+JSON 文本格式在语法上与创建 JavaScript 对象的代码相同。
+由于这种相似性，无需解析器，JavaScript 程序能够使用内建的 eval() 函数，用 JSON 数据来生成原生的 JavaScript 对象。
+
+JSON值包括：
+    数字（整型和浮点型）
+    字符串
+    布尔值
+    数组
+    对象
+    null

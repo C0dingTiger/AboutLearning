@@ -1,0 +1,19 @@
+ 表单绑定：
+ v-model 指令的作用是将 input 元素 value 属性的值和我们创建的 Vue 对象中 value 的值进行绑定，我们知道 input 有一个 value 属性，它的值会在浏览器显示
+
+v-bind 指令用来绑定值
+
+对象的表示：
+	todos:[
+            {id: 0, title: '学习 Vue'},
+            {id: 1, title: '整个牛项目'},
+            {id: 2, title: '走上人生巅峰'},
+    ]
+
+html中调用vue对象中的数据用 ‘***’：
+	<li v-for='todo in todos' :key='todo.id'>
+      <span>{{ todo.title }}</span>
+      <input type="button" value="标为完成">
+    </li>
+
+    调用function用“****”

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"><title>Vue Todo Tutorial</title>
+	<style>
+	    .empty {
+	      border-color: red;
+ 	    }
+    </style>
+
+</head>
+
+<body>
+	<div id="app">
+		<!-- <input type="text" class='empty' v-model="value"> -->
+		<input type="text" v-bind:class='{empty: count==5}' v-model="value"> 
+		<!-- 类似bind后可使用vue对象里的value，然后{}类似一个function 判断 count不为真即为0时显示class .empty -->
+
+		<input type="button" value="发送" v-on:click="send"/>
+		<div>value 的值是:{{ value }}</div>
+		<!-- 引用 count -->
+		<div>字数:{{ count }}</div>
+	</div>
+</body>
+
+
+<script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: function () {
+            return {value: ''}
+        },
+
+        methods: {
+            send: function () {  //this 'send' is v-on:click="send"
+                alert(this.value+'发送成功！');
+                this.value = ''
+            }
+        },
+
+        computed: {
+            count: function () {
+                return this.value.length
+            }
+        }
+
+    })
+</script>
+</html>

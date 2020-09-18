@@ -1,3 +1,34 @@
 External styles: are defined within the <link> element, inside the <head> section of an HTML page;
+
 Internal styles: are defined within the <style> element, inside the <head> section of an HTML page;
+
 Inline styles: are defined within the "style" attribute of the relevant element: <h1 style="color:blue;text-align:center;">This is a heading</h1>
+
+Background color：
+	+ background-color:
+	  opacity: 0.3  (1.0~0.0)
+	+ background-image: url("paper.gif");
+	+ background-repeat:no-repeat; (repeat-x,repeat-y)
+	+ background-position: right top;
+	+ background-attachment: scrolled; (fixed)
+
+Border:
+	+border-style: solid;	(dotted)
+	+border-width: medium;	(thick, *px)
+	+border-color: blue;
+	+border sides:
+		+border-top-style: dotted;
+		+border-right-style: solid;
+		+border-bottom-style: dotted;
+		+border-left-style: solid;
+	+margin: top right bottom left;
+	+Padding:		
+	    + padding-top
+	    + padding-right
+	    + padding-bottom
+	    + padding-left
+	+Font family:
+		+font-style: normal; (italic, oblique)
+		+font-weight: normal;
+		+font-variant: normal;(small-caps)
+		

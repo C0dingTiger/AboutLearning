@@ -19,7 +19,7 @@
 <div id="todo-app">
   <div>
     <input type="button" value="全部标为完成"/>
-    <input type="text" placeholder="添加 todo" v-model="newTodoTitle" @keyup.enter="addTodo"/>
+    <input type="text" placeholder="添加 todo" v-model="newTodoTitle" v-focus="true" @keyup.enter="addTodo"/>
     <input type="button" Value="Add" v-on:click="addTodo">
   </div>
   <!-- todo list -->
@@ -53,17 +53,17 @@
 
       <input type="button" value="标为完成" @click="markAsCompleted(todo)">
       <input type="button" value="删除" @click="removeTodo(todo)">
-      <input type="text" value="编辑 todo..." v-if="editedTodo !==null&& editedTodo.id===todo.id" @keyup.enter="editDone(todo)" @keyup.esc="cancelEdit(todo)"/>
+      <input type="text" value="编辑 todo..." v-focus="true" v-if="editedTodo !==null&& editedTodo.id===todo.id"  v-model="todo.title" @keyup.enter="editDone(todo)" @keyup.esc="cancelEdit(todo)"/>
       
     </li>
   </ul>
   <!-- end todo list -->
   <div>
-    <span>剩余 3 项未完成 ---</span>
+    <span>剩余 {{leftTodosCount}} 项未完成 ---</span>
     <span>筛选：
-      <input type="button" class="selected" value="全部">
-      <input type="button" value="进行中">
-      <input type="button" value="已完成">
+      <input type="button" class="selected" value="全部" @click="markAll"  @click="intention='all'">
+      <input type="button" value="进行中" @click="intention='ongoing'">
+      <input type="button" value="已完成" @click="intention='finished'">
       <input type="button" value="清除已完成">
       <input type="button" value="清除全部">
     </span>
@@ -84,6 +84,7 @@
             ],
             newTodoTitle: '',
             editedTodo: null, // 用于暂存编辑前的 todo 状态
+            intention: 'all', // 默认为 all
           }
         },
         methods: {
@@ -117,7 +118,45 @@
                 todo.title = this.editedTodo.title;
                 this.editedTodo = null
             },
+            markAll: function(todo){
+            	this.todos.map(function(todo){
+            		if (!todo.completed) {
+            			todo.completed=true;
+            		}
+            	})
+            }
         },
+
+        computed: {
+            leftTodosCount: function () {
+                return this.todos.filter(todo => !todo.completed).length
+            },
+
+            filteredTodos: function () {
+                if (this.intention === 'ongoing') {
+                    return this.todos.filter(todo => !todo.finished)
+                } else if (this.intention === 'finished') {
+                    return this.todos.filter(todo => todo.finished)
+                } else {
+                    // 其它未定义的意图我们为其返回全部 todos，
+                    // 这里面已经包含了 all 意图了
+                    return this.todos
+                }
+            },
+
+        },
+
+        // 自定义局部指令
+        directives: {
+            focus: {
+            	// 指令的定义
+                inserted: function (el) {
+                    el.focus()
+                }
+            }
+        },
+
+
     })
 
 

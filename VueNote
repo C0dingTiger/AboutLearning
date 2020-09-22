@@ -17,3 +17,17 @@ html中调用vue对象中的数据用 ‘***’：
     </li>
 
     调用function用“****”
+
+V-else-if使用：
+	<div v-if="type === 'A'">
+	  A
+	</div>
+	<div v-else-if="type === 'B'">
+	  B
+	</div>
+	<div v-else-if="type === 'C'">
+	  C
+	</div>
+	<div v-else>
+	  Not A/B/C
+	</div>

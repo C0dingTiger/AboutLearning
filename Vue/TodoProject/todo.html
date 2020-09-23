@@ -16,59 +16,40 @@
 
 <body>
 
+<h1>To-do List</h1>
+
 <div id="todo-app">
   <div>
-    <input type="button" value="全部标为完成"/>
-    <input type="text" placeholder="添加 todo" v-model="newTodoTitle" v-focus="true" @keyup.enter="addTodo"/>
+    <input type="button" value="All Marked As Completed"/>
+    <input type="text" placeholder="Adding todo" v-model="newTodoTitle" v-focus="true" @keyup.enter="addTodo"/>
     <input type="button" Value="Add" v-on:click="addTodo">
   </div>
-  <!-- todo list -->
-  <!--html手写list   底下为从vue data 调用 
-  <ul>
-    <li>
-      <span class="completed">学习 Vue</span>
-      <input type="button" value="标为完成">
-      <input type="button" value="删除">
-      <input type="text" value="编辑 todo..."/>
-    </li>
-    <li>
-      <span>整个牛项目</span>
-      <input type="button" value="标为完成">
-      <input type="button" value="删除">
-      <input type="text" value="编辑 todo..."/>
-    </li>
-    <li>
-      <span>迎娶白富美走上人生巅峰</span>
-      <input type="button" value="标为完成">
-      <input type="button" value="删除">
-      <input type="text" value="编辑 todo..."/>
-    </li>
-  </ul> -->
-
 
 <!-- 特别注意我们还给 li 元素绑定了一个 key 属性，这将告诉 Vue 每个渲染的 li 元素都是不同的，因为 id 不同 -->
   <ul>
-    <li v-for='todo in todos' :key='todo.id'>
+    <li v-for='todo in filteredTodos' :key='todo.id'>
       <span :class="{completed: todo.completed}" @dblclick="editTodo(todo)">{{ todo.title }}</span>
 
-      <input type="button" value="标为完成" @click="markAsCompleted(todo)">
-      <input type="button" value="删除" @click="removeTodo(todo)">
-      <input type="text" value="编辑 todo..." v-focus="true" v-if="editedTodo !==null&& editedTodo.id===todo.id"  v-model="todo.title" @keyup.enter="editDone(todo)" @keyup.esc="cancelEdit(todo)"/>
+      <input type="button" value="Mark as Completed" @click="markAsCompleted(todo)">
+      <input type="button" value="Delete" @click="removeTodo(todo)">
+      <input type="text" value="Edit todo..." v-focus="true" v-if="editedTodo !==null&& editedTodo.id===todo.id"  v-model="todo.title" @keyup.enter="editDone(todo)" @keyup.esc="cancelEdit(todo)"/>
       
     </li>
   </ul>
   <!-- end todo list -->
   <div>
-    <span>剩余 {{leftTodosCount}} 项未完成 ---</span>
-    <span>筛选：
-      <input type="button" class="selected" value="全部" @click="markAll"  @click="intention='all'">
-      <input type="button" value="进行中" @click="intention='ongoing'">
-      <input type="button" value="已完成" @click="intention='finished'">
-      <input type="button" value="清除已完成">
-      <input type="button" value="清除全部">
+    <span> {{leftTodosCount}} Items Left ---</span>
+    <span>Filter：
+      <input type="button" class="selected" value="All" @click="markAll"  @click="intention='all'">
+      <input type="button" value="Ongoing" @click="intention='ongoing'">
+      <input type="button" value="Completed" @click="intention='completed'">
+      <input type="button" value="Clear Completed" @click="clearCompleted">
+      <input type="button" value="Clear All" @click="clearAll">
     </span>
   </div>
 </div>
+
+
 
 <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
 <script>
@@ -124,7 +105,14 @@
             			todo.completed=true;
             		}
             	})
-            }
+            },
+
+            clearCompleted: function () {
+                this.todos = this.todos.filter(todo => !todo.completed)
+            },
+            clearAll: function () {
+                this.todos = []
+            },
         },
 
         computed: {
@@ -134,9 +122,9 @@
 
             filteredTodos: function () {
                 if (this.intention === 'ongoing') {
-                    return this.todos.filter(todo => !todo.finished)
-                } else if (this.intention === 'finished') {
-                    return this.todos.filter(todo => todo.finished)
+                    return this.todos.filter(todo => !todo.completed)
+                } else if (this.intention === 'completed') {
+                    return this.todos.filter(todo => todo.completed)
                 } else {
                     // 其它未定义的意图我们为其返回全部 todos，
                     // 这里面已经包含了 all 意图了
@@ -158,7 +146,6 @@
 
 
     })
-
 
 </script>
 

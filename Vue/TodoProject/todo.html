@@ -38,7 +38,9 @@
   </ul>
   <!-- end todo list -->
   <div>
-    <span> {{leftTodosCount}} Items Left ---</span>
+    <span v-if="'leftTodisCount'!==0"> {{leftTodosCount}} Items Left ---</span>
+    <span v-else> Good jobs </span>
+    
     <span>Filter：
       <input type="button" class="selected" value="All" @click="markAll"  @click="intention='all'">
       <input type="button" value="Ongoing" @click="intention='ongoing'">
@@ -47,6 +49,11 @@
       <input type="button" value="Clear All" @click="clearAll">
     </span>
   </div>
+
+
+
+
+  <p v-if="view">you can see this string</p>
 </div>
 
 
@@ -54,6 +61,23 @@
 <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
 <script>
     let id = 0; // 用于 id 生成
+    var STORAGE_KEY = 'vue2.x-todo-tutorial';
+    var todoStorage = {
+        fetch: function () {
+            var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            todos.forEach(function (todo, index) {
+                todo.id = index
+            });
+            todoStorage.uid = todos.length;
+            return todos
+        },
+        save: function (todos) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+        }
+    };
+
+
+
     var app = new Vue({
         el: '#todo-app',
         data: function () {
@@ -66,14 +90,32 @@
             newTodoTitle: '',
             editedTodo: null, // 用于暂存编辑前的 todo 状态
             intention: 'all', // 默认为 all
+            todos: todoStorage.fetch(),
+            view: true,
           }
         },
+
+        watch: {
+            todos: {
+                handler: function (todos) {
+                    todoStorage.save(todos)
+                },
+                deep: true
+            }
+        },
+
+
         methods: {
             addTodo: function () {
               if (this.newTodoTitle.length<1) {
                 alert("Empty is not acceptable!!");
               }else{
-                this.todos.push({id: id++, title: this.newTodoTitle, completed:false});
+                // this.todos.push({id: id++, title: this.newTodoTitle, completed:false});
+
+                this.todos.push(
+                    // 修改后的 todo 模型
+                    {id: todoStorage.uid++, title: this.newTodoTitle, completed: false}
+                );
                 this.newTodoTitle = '';
               }
             },
@@ -145,7 +187,11 @@
         },
 
 
-    })
+    });
+
+
+
+
 
 </script>
 

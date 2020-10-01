@@ -1,0 +1,31 @@
+Multiplexer tool
+
+Installation:
+	$sudo apt-get install tmux
+
+Start:
+	$tmux
+
+Splitting Panes:
+	Ctrl + B  + %
+
+Navigating Panes:
+	Ctrl + B  + arrow key
+
+Closing:
+	$ exit  or Ctrl + D
+
+Session Handling:
+	detach your current session use : (This will detach your session but will leave you’re doing in that session running in the background.)
+	Ctrl + B +D
+	 
+	Figure out which sessions are running by using
+	$ tmux ls
+
+	To connect to that session you start tmux again but this time tell it which session to attach to:
+	$ tmux attach -t 0
+
+Other:
+	Ctrl + B + Z: make a pane go full screen. Hit Ctrl + B + Z again to shrink it back to its previous size
+
+	Ctrl + B + , : Rename the current window

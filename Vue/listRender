@@ -1,0 +1,88 @@
+1.用 v-for 把一个数组对应为一组元素
+	我们可以用 v-for 指令基于一个数组来渲染一个列表。v-for 指令需要使用 item in items 形式的特殊语法，其中 items 是源数据数组，而 item 则是被迭代的数组元素的别名
+	eg.
+	<ul id="example-1">
+	  <li v-for="item in items" :key="item.message">
+	    {{ item.message }}
+	  </li>
+	</ul>
+
+	var example1 = new Vue({
+	  el: '#example-1',
+	  data: {
+	    items: [
+	      { message: 'Foo' },
+	      { message: 'Bar' }
+	    ]
+	  }
+	})
+
+2.在 v-for 里使用对象
+
+	你也可以用 v-for 来遍历一个对象的 property。
+
+	<ul id="v-for-object" class="demo">
+	  <li v-for="value in object">
+	    {{ value }}
+	  </li>
+	</ul>
+
+	new Vue({
+	  el: '#v-for-object',
+	  data: {
+	    object: {
+	      title: 'How to do lists in Vue',
+	      author: 'Jane Doe',
+	      publishedAt: '2016-04-10'
+	    }
+	  }
+	})
+
+	也可以提供第二个的参数为 property 名称 (也就是键名)：
+	<div v-for="(value, name) in object">
+	  {{ name }}: {{ value }}
+	</div>
+
+	还可以用第三个参数作为索引：
+	<div v-for="(value, name, index) in object">
+	  {{ index }}. {{ name }}: {{ value }}
+	</div>
+
+
+3.在 v-for 里使用值范围
+	v-for 也可以接受整数。在这种情况下，它会把模板重复对应次数。
+
+	<div>
+	  <span v-for="n in 10">{{ n }} </span>
+	</div>
+
+
+4.在 <template> 上使用 v-for
+	类似于 v-if，你也可以利用带有 v-for 的 <template> 来循环渲染一段包含多个元素的内容。比如：
+
+	<ul>
+	  <template v-for="item in items">
+	    <li>{{ item.msg }}</li>
+	    <li class="divider" role="presentation"></li>
+	  </template>
+	</ul>
+
+5. v-for 与 v-if 一同使用
+	注意我们不推荐在同一元素上使用 v-if 和 v-for。更多细节可查阅风格指南。
+	当它们处于同一节点，v-for 的优先级比 v-if 更高，这意味着 v-if 将分别重复运行于每个 v-for 循环中。当你只想为部分项渲染节点时，这种优先级的机制会十分有用，如下：
+
+	<li v-for="todo in todos" v-if="!todo.isComplete">
+	  {{ todo }}
+	</li>
+
+	上面的代码将只渲染未完成的 todo。
+	而如果你的目的是有条件地跳过循环的执行，那么可以将 v-if 置于外层元素 (或 <template>) 上。如：
+
+	<ul v-if="todos.length">
+	  <li v-for="todo in todos">
+	    {{ todo }}
+	  </li>
+	</ul>
+	<p v-else>No todos left!</p>
+
+	

@@ -30,3 +30,6 @@ Other:
 	Ctrl + B + Z: make a pane go full screen. Hit Ctrl + B + Z again to shrink it back to its previous size
 
 	Ctrl + B + , : Rename the current window
+
+	Kill session:
+	$ pkill -f tmux

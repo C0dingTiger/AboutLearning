@@ -51,14 +51,23 @@
   </div>
 
 
+  <blog-post propts="this is testing prop"></blog-post>
+  <blog-post 
+    v-for= "todo in filteredTodos"
+    v-bind:key="todo.id"
+    v-bind:propts="todo.title"
+    v-bind:amount="todo.id"
+
+  ></blog-post>
 
 
   <p v-if="view">you can see this string</p>
+
+
 </div>
 
-
-
 <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+
 <script>
     let id = 0; // 用于 id 生成
     var STORAGE_KEY = 'vue2.x-todo-tutorial';
@@ -78,8 +87,15 @@
 
 
 
+    Vue.component('blog-post', {
+      props: ['propts','amount'],
+      template: '<h3>{{amount}}----------{{ propts }}</h3>' 
+                
+    })
+
     var app = new Vue({
         el: '#todo-app',
+
         data: function () {
           return {
             todos: [
@@ -188,9 +204,6 @@
 
 
     });
-
-
-
 
 
 </script>

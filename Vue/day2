@@ -1,0 +1,118 @@
+vue.js dev-tools:Chrome插件，用来查看vue对象中所有data的值与变化，用来调试。
+
+循环并操作数组的方法有：forEach  ， some  ，  filter  ， findIndex
+
+parentString.indexof(sonString) 
+	 ==0为包含， ==-1 为不包含  
+	 当sonString为空时，也为包含，即返回0
+
+parentStringArray.filter(sonStringArray)
+	返回一个新的数组包含所有included items.
+
+ES6中提供一个新方法： includes
+	String.prototype.includes('***')
+	包含返回true，否则false
+
+Vue全局过滤器使用：filter
+	只有两个地方可以使用：  {{}} 和  v-bind
+
+	格式：
+		若要对name进行过滤
+		{{name | 过滤器名}}
+		
+		定义filter：
+		//function中第一个参数默认为 ‘|’符号前面的data(此处为name)
+		Vue.filter('过滤器名',function(data){})
+
+		且过滤器可以叠加使用：
+		{{name | 过滤器1  | 过滤器2 }}
+
+
+私有过滤器： 优先级大于全局
+	格式：
+		和methods类似：
+			filters：{
+				name: function(){}
+			}
+
+若时间需要补0,可以使用 padStart()
+
+自定义按键修饰符：
+	eg. 按回车调用方法
+		@keyup.enter="**"
+		类似的还有： .tab   .delete  .esc   .space  .up   .down  .left  .right
+		也可以查找键盘码代替 ， eg. F2 对应113   则可写成  .113
+
+		因此可以自定义键盘符：
+			Vue.config.keyCodes.f2 = 113
+
+自定义全局指令 让文本框获取焦点：
+	使用Vue.directive()定义全局的指令 v-focus
+		参数1：指令的名称，定义时不需要加 v-  ， 但是在调用的时候要加上v- 调用
+		参数2: 为一个对象，且包含一些指令相关函数，这些函数在特定的阶段，执行相关的操作
+
+
+	1. JS方法
+		document.getElementById('search').focus()
+	2.Vue 
+		Vue.directive('focus',{
+			
+			//当指令绑定到元素上的时候，会立即执行这个bind函数
+			//在每个函数中第一个参数永远都是el, 表示被绑定的对象， 该el为一个原生的DOM对象
+			//当元素刚绑定时，并未插入到DOM中，这时候调用focus没有作用
+			bind:function(el){
+				el.focus()，   //因此 focus（）不应该绑定在此处
+			},
+
+			//元素插入到DOM中的时候，会执行inserted函数  只触发一次
+			inserted:function(el){
+				el.focus()
+			},
+			
+			//当VNode更新的时候，会执行updated，可能会触发多次
+			updated:function(el){}
+		})
+
+		通俗理解 bind和 inserted：
+			加载到内存中用bind，和Style相关的在bind中
+			从内存到DOM中用inserted，和JS相关的在inserted中
+
+
+	简写 & 私有
+	eg.
+		directives:{
+			'fontWeight':{
+				bind:function(el,binding){
+					el.style.fontWeight=binding.value
+				}
+			},
+
+			//简写可代表同时写入bind和updated函数
+			'fontSize':funtion(el,binding){
+				el.style.fontSize=binding.value
+			}
+		}
+
+Vue实例的生命周期
+	创建周期的4个函数：
+		beforeCreate():初始化events
+		created():初始化data和methods
+		beforeMount():新的模板并未挂载到页面中，已存在内存中
+		mounted():挂载模板渲染页面
+
+	运行阶段 2个函数：当数据更改时触发这2个函数
+		beforeUpdate： 当某操作引起内存中data的改变触发该函数，并重新将内存中的数据render到DOM页面中
+		updated：此时页面已发生改变
+
+	销毁阶段 2个函数：
+		beforeDestroy：实例中所有内容处于可用状态
+		destroyed：已销毁状态
+
+Vue数据交互：
+	axios 或者vue-resource
+
+	vue-resource：
+		get: this.$http.get(url,option).then(successfulCallBack, erroCallBack)
+
+
+	JSONP

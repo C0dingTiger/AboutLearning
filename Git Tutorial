@@ -118,6 +118,10 @@ Rebase：
 	rebase操作的特点：把分叉的提交历史“整理”成一条直线，看上去更直观。缺点是本地的分叉提交已经被修改过了。
 	$ git rebase
 
+	将本其余分支merge到本branch上：
+	$ git rebase <other branch name>
+
+
 Tags：
 	创建tag
 		1. 命令git tag <tagname>用于新建一个标签，默认为HEAD，也可以指定一个commit id；

@@ -87,7 +87,9 @@ Feature Branch：
 	$ git remote -v	
 
 	推送本地分支上远程repository：
-		推送本地master：$ git push origin master
+		推送本地master：$ git push <remote> <branch>
+		$ git push origin master
+		
 		推送本地dev:$ git push origin dev
 
 	如何判断推送哪个分支：

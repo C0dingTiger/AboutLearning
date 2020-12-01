@@ -16,3 +16,89 @@ tar：（最为广泛应用） 同上，但是tar可以压缩多个文件或者�
 	-C:指定解压后存放文件的目录
   
   eg： 解压： $tar -zxvf **.tar.gz  -C /tmp
+
+
+权限管理：
+  1.查看文件权限： $ll
+    -参数：
+    	r:可读
+    	w：可写
+    	x：可执行
+    	+：添加权限       eg. $chmod +x file  ,   $chmod u+x file
+    	-：去权限			eg. $chmod -w file    
+    	=：设置权限		eg. $chmod u=rwx,g=rx,o=rx file
+    	u：用户
+    	g：组
+    	o：其他
+
+    数字表达权限： 根据user/group/other位置，每个有三位bits，根据3位二进制表示r/w/x
+    			eg. 755 => 7/5/5 => 111/101/101 => rwx/r-x/r-x
+    			具体操作为： chmod 755 file
+
+  2. umask:用来确定创建文件的默认权限
+  	$umask ***(eg.0022)
+  	eg. umask 0022     => 000 010 010
+  	创建的目录文件权限为      rwx r-x r-x
+  	创建的普通用户权限为      rw- r-- r--
+
+  	配置：
+  		所有用户： /etc/profile
+  		单个用户： ～/.profile  或者 ～/.bash_profile
+
+  3. chattr: 修改文件属性以提高稳定性
+  		$chattr [option] file
+  		eg: chattr +i file
+  		eg: chattr -i file
+
+  		option:
+  				i: ignore  使文件无法被删除
+  				+: add
+  				-: remove
+  4. lsattr:查看使用chattr设置的文件属性
+
+用户和用户组：
+	1.用户
+		$whoami：查看当前用户
+
+		/etc/passwd: 该文件存放系统中所有用户信息，每行含义为如下
+				coidingtiger:x:1000:1000:CoidingTiger,,,:/home/coidingtiger:/bin/bash
+				用户名：（加密）密码：描述：用户ID/UID：组ID/UID：用户家目录：shell
+
+		useradd：添加用户
+			选项：-d：指定用户家目录
+				-u：指定用户ID 必须大于500（500以内被系统占用）
+				-s：指定用户执行的shell
+				禁止用户登录： $chsh 用户名 -s /sbin/nologin   
+		userdel：删除用户，彻底删除还需删除 /home/用户名 目录 和 /var /mail/用户名 目录
+
+		passwd：设置用户密码
+			查看用户密码： /etc/shadow
+			$passwd 用户名
+
+		su：切换用户
+		$su 用户名
+
+		标识符：
+			#:超级用户
+			$:普通用户
+			~:用户家目录
+
+	2.组
+		/etc/group：查看系统中所有的组
+
+		groupadd：添加组
+		groupdel：删除组
+
+		gpasswd：向用户组添加或删除用户
+			$gpasswd [option] 用户名 组名
+			option：
+				-a：add
+				-d：delete
+
+		chgrp：设置文件所属组（change group）
+			$ chagrp 组名 文件名
+
+		chown： 设置文件所属者（change owner）
+			$chown user:group 文件名
+
+

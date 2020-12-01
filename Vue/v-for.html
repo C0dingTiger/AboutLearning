@@ -1,0 +1,77 @@
+<!-- 遍历对象时，key是处于第二个位置的，在value之后 ，即具体位置为  0：val， 1：key  2：index-->
+
+<!-- 若使用v-for迭代数字，count从1开始，而不是0 -->
+
+<!-- v-for中key的使用：
+    key的作用是保证每个遍历元素的唯一性，防止例如新增元素导致排列的变化，如给每个元素一个checkbox，tick完后新增一个元素导致顺序的变化
+    -key的属性使用number或字符串类型
+    -key必须使用v-bind绑定
+    因此尽量使用key属性
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"><title>Vue Todo Tutorial</title>
+	<style>
+	  
+    </style>
+
+</head>
+
+<body>
+
+	<div id="app">
+	   <!-- classic way to implemente it  -->
+        <h1 class="red thin italic">It is  : {{msg}}</h1>
+
+
+        <!-- 1.循环普通数组 -->
+        <p v-for="(item,i) in list">Index is：{{i}}-------Item is {{item}}</p>
+        <br>
+
+        <!-- 2.循环对象数组 -->
+        <p v-for="(it,ii) in objectList">Index is：{{it.id}}-------Item is {{it.name}}</p>
+        <br>
+
+        <!-- 3.循环对象 -->
+        <p v-for="(val,key) in user">Index is：{{val}}-------Item is {{key}}</p>
+        <br>
+
+        <!-- 4. 迭代数字 -->
+        <p v-for="count in 10">This is time: {{count}}</p>
+
+	</div>
+
+</body>
+
+
+<script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+
+        data:{
+            msg:'test v-bind function',
+            list:[1,2,3,4,5,6],
+            objectList:[
+                {id:1, name:'zc1'},
+                {id:2, name:'zc2'},
+                {id:3, name:'zc3'},
+                {id:4, name:'zc4'},
+            ],
+
+            user:{
+                id:1,
+                name: 'Tony',
+                gender:'uncertain',
+            }
+        },
+
+        methods: {
+        },
+   
+    })
+
+</script>
+</html>

@@ -6,45 +6,112 @@
 	    .empty {
 	      border-color: red;
  	    }
-    </style>
 
+        .red{
+            color:red;
+
+        }
+
+        .thin{
+            font-weight: 200;
+        }
+
+        .italic{
+            font-style: italic;
+        }
+
+        .active{
+            letter-spacing: 0.5em;
+        }
+
+    </style>
+ 
 </head>
 
 <body>
-	<div id="app">
-		<!-- <input type="text" class='empty' v-model="value"> -->
-		<input type="text" v-bind:class='{empty: count==5}' v-model="value"> 
-		<!-- 类似bind后可使用vue对象里的value，然后{}类似一个function 判断 count不为真即为0时显示class .empty -->
 
-		<input type="button" value="发送" v-on:click="send"/>
-		<div>value 的值是:{{ value }}</div>
-		<!-- 引用 count -->
-		<div>字数:{{ count }}</div>
+	<div id="app">
+	   <!-- classic way to implemente it  -->
+        <h1 class="red thin italic">It is  : {{msg}}</h1>
+
+        <h1 class="['red', 'thin', judge?'active':'']">This is  : {{msg}}</h1>
+
+
+
+        <!-- v-bind 只能实现数据的单向绑定 -->
+        <input type="text" v-bind:value="msg" style="width: 100%;">
+
+        <!-- v-bind 可以实现数据的双向绑定，使所有的 “msg”变量发生改变 -->
+        <input type="text" v-model:value="msg" style="width: 100%;">
+    	
+
+        <!-- calculator -->
+        <br>
+        <h2>Following is a calculator program</h2>
+        <input type="text" v-model="num1">
+        <select v-model="opt">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model="num2">
+        <input type="button" value="=" @click="calc">
+        <input type="text" v-model="result">
+
+
+        <!-- test filter -->
+        <p>{{filterTest | flt(' &&xn ') }}</p>
+
+        <p>{{today}}</p>
+
 	</div>
+
 </body>
 
 
 <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
 <script>
+
+    Vue.filter('flt',function (filterTest,arg1) {
+        return filterTest.replace('zc','zyc'+arg1)
+    })
+
     var app = new Vue({
         el: '#app',
-        data: function () {
-            return {value: ''}
+
+        data:{
+            msg:'test v-bind function',
+            num1:0,
+            num2:0,
+            result:0,
+            opt:'+',
+            judge:false,
+            filterTest:'my name is zc',
+            today: new Date(),
+
         },
 
         methods: {
-            send: function () {  //this 'send' is v-on:click="send"
-                alert(this.value+'发送成功！');
-                this.value = ''
+           calc(){
+            switch(this.opt){
+                case '+':
+                    this.result=parseInt(this.num1)+parseInt(this.num2);
+                    break;
+                case '-':
+                    this.result=parseInt(this.num1)-parseInt(this.num2);
+                    break;
+                case '*':
+                    this.result=parseInt(this.num1)*parseInt(this.num2);
+                    break;
+                case '/':
+                    this.result=parseInt(this.num1)/parseInt(this.num2);
+                    break;
             }
+           },
         },
-
-        computed: {
-            count: function () {
-                return this.value.length
-            }
-        }
-
+   
     })
+
 </script>
 </html>

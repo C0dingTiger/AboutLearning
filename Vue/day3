@@ -1,0 +1,23 @@
+
+可通过配置全局emulate选项避免每次带上参数
+	Vue.http.options.emulateJSON=true
+
+动画和过渡：
+	v-enter   ==== v-enter-active ===》  v-enter-to
+	v-leave   ==== v-leave-active ===》  v-leave-to
+
+	1.使用transition元素（Vue官方提供）把需要被动画控制的元素包裹起来 
+		<transition>  </transition>
+
+		<style>  
+			.v-enter,
+			.v-leave-to{
+				opacity: 0;
+				transform: translateX(150px);
+			}
+
+			.v-enter-active,
+			.v-leave-active{
+				transtion:all 0.8s ease;
+			}
+		</style>

@@ -1,7 +1,7 @@
 Git Tutorial：
 
 
-Working Directory  ======= git add ========> { Staging Area  ========== git commit =========> Git Repository }
+Working Directory  ======= git add ========> { Staging Area  ========== git commit =========> Git Repository }  ======git push=====> Remote Repository
 
 
 

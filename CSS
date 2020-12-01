@@ -4,6 +4,7 @@ Internal styles: are defined within the <style> element, inside the <head> secti
 
 Inline styles: are defined within the "style" attribute of the relevant element: <h1 style="color:blue;text-align:center;">This is a heading</h1>
 
+
 Background color：
 	+ background-color:
 	  opacity: 0.3  (1.0~0.0)
@@ -11,6 +12,7 @@ Background color：
 	+ background-repeat:no-repeat; (repeat-x,repeat-y)
 	+ background-position: right top;
 	+ background-attachment: scrolled; (fixed)
+
 
 Border:
 	+border-style: solid;	(dotted)
@@ -32,3 +34,8 @@ Border:
 		+font-weight: normal;
 		+font-variant: normal;(small-caps)
 		
+
+To move the image which inside another element to the center:
+	position: absolute;
+	left:50%;                                    //50% of the background element;
+	transform: translate(-50%);    				 //50% of the image itself;

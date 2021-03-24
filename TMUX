@@ -17,7 +17,7 @@ Closing:
 
 Session Handling:
 	detach your current session use : (This will detach your session but will leave you’re doing in that session running in the background.)
-	Ctrl + B +D
+	Ctrl + B => D
 	 
 	Figure out which sessions are running by using
 	$ tmux ls

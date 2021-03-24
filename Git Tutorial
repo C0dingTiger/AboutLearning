@@ -143,3 +143,21 @@ Tags：
 		命令git tag -d <tagname>可以删除一个本地标签；
 
 		命令git push origin :refs/tags/<tagname>可以删除一个远程标签。
+
+
+
+
+
+Reset remote url:
+	1.check current remote
+	$ git remote -v
+
+	2.Change your remote's URL from SSH to HTTPS with the git remote set-url command.
+	$ git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+
+	3.Verify that the remote URL has changed.
+	$ git remote -v
+
+	copy a specific branch on remote:
+	git fetch
+	git checkout -b localName origin/remoteName

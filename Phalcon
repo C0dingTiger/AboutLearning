@@ -1,0 +1,21 @@
+Structure:
+
+
+	App
+│   ├── controllers:They are used for processing requests and generating response.
+│   ├── models:Models include all the logic required to interact with the database. 		It is actually used for data representation.
+│   └── views:It constitutes all the views related to the web application. These 			views are displayed to the end users with the help of controllers.
+└──Config
+	└──router:The router component allows to define routes that are mapped to the 		controllers or handlers that should receive the request. A router parses a 		URI as per the information received.
+|
+└── public
+    ├── css
+    ├── img
+    ├── index.php
+    └── js
+│
+│
+│
+│
+│
+│

@@ -1,0 +1,5 @@
+ssh charlie@adverdev.com -p40404
+
+https://e2v.adverpost.com/charlie/helpers/mydesktopRayWhite.php
+
+scp -P 40404 rayWhiteActiveListing.php charlie@adverdev.com:/home/charlie/webroot/helpers

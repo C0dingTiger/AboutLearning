@@ -2,7 +2,7 @@
 	<a v-bind:href="url"> ... </a>
   Here href is the argument, which tells the v-bind directive to bind the element’s href attribute to the value of the expression url.
   
-- Another example is the v-on directive, which listens to DOM events:
+- v-on: Another example is the v-on directive, which listens to DOM events:
 	<a v-on:click="doSomething"> ... </a>
   Here the argument is the event name to listen to. 
 

@@ -21,7 +21,7 @@
 	new Vue({ el: '#components-demo' })
 
 	
-	#data 必须是一个函数
+	#data 必须是一个函数！！！！！！
 	一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝：
 
 	data: function () {
@@ -30,7 +30,7 @@
 	  }
 	}
 
-	如果 Vue 没有这条规则，点击一个按钮就可能会像如下代码一样影响到其它所有实例：
+	如果 Vue 没有这条规则，点击一个按钮就可能会像如下代码一样影响到其它所有实例：（所有component使用同一个data）
 
 
 2.组件的组织
@@ -44,3 +44,11 @@
 	全局注册的组件可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中。
 
 3.通过 Prop 向子组件传递数据
+	Props are custom attributes you can register on a component. When a value is passed to a prop attribute, it becomes a property on that component instance. To pass a title to our blog post component, we can include it in the list of props this component accepts, using a props option:
+	
+	Vue.component('blog-post', {
+	  props: ['title'],
+	  template: '<h3>{{ title }}</h3>'
+	})
+	
+	

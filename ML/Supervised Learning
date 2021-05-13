@@ -1,0 +1,6 @@
+Supervised learning:(data sets are different type, labeled either as a positive or negative example)
+Supervised learning problems are categorized into "regression" and "classification" problems
+  -regression problem, we are trying to predict results within a continuous output(for Prediction)
+  -classification, trying to map input variables into discrete categories. 
+  
+Unsupervised Learning:

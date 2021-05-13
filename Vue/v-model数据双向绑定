@@ -1,3 +1,12 @@
+- v-bind directive is used to reactively update an HTML attribute:
+	<a v-bind:href="url"> ... </a>
+  Here href is the argument, which tells the v-bind directive to bind the element’s href attribute to the value of the expression url.
+  
+- v-on: Another example is the v-on directive, which listens to DOM events:
+	<a v-on:click="doSomething"> ... </a>
+  Here the argument is the event name to listen to. 
+
+
 v-bind只能实现数据的单向绑定，从M自动绑定到V，无法实现双向绑定，即页面input无法改变后台数据
 
 v-model可以实现单元素和model中数据的双向绑定

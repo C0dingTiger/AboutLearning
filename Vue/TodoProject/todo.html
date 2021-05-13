@@ -146,11 +146,11 @@
 
             editTodo: function(todo){
               // this.editedTodo={id:todo.id, title:todo.title};
-              this.editedTodo = {id: todo.id, title: todo.title, completed: todo.completed}
+              this.editedTodo = {id: todo.id, title: todo.title, completed: todo.completed};
 
             },
             editDone: function (todo) {
-                this.editedTodo = null
+                this.editedTodo = null;
             },
 
             cancelEdit: function (todo) {
@@ -166,10 +166,10 @@
             },
 
             clearCompleted: function () {
-                this.todos = this.todos.filter(todo => !todo.completed)
+                this.todos = this.todos.filter(todo => !todo.completed);
             },
             clearAll: function () {
-                this.todos = []
+                this.todos = [];
             },
         },
 

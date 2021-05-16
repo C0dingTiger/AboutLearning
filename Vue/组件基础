@@ -1,6 +1,7 @@
 1. 基本示例
+	
 	这里有一个 Vue 组件的示例：
-
+	
 	// 定义一个名为 button-counter 的新组件
 	Vue.component('button-counter', {
 	  data: function () {
@@ -31,6 +32,7 @@
 	}
 
 	如果 Vue 没有这条规则，点击一个按钮就可能会像如下代码一样影响到其它所有实例：（所有component使用同一个data）
+	
 
 
 2.组件的组织

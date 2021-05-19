@@ -1,5 +1,11 @@
+知识点：
+	-global component should be prior to Vue instance
+	-data in a component must be a function with a return value
+	-shared data defined outside of the component and non-shared defined inside of the component
+
+
 1. 基本示例
-	
+
 	这里有一个 Vue 组件的示例：
 	
 	// 定义一个名为 button-counter 的新组件
@@ -33,7 +39,25 @@
 
 	如果 Vue 没有这条规则，点击一个按钮就可能会像如下代码一样影响到其它所有实例：（所有component使用同一个data）
 	
+	3种方式可创建component：
+		1.
+		var tmp={
+			template:'<h1></h1>'
+		}
+		Vue.component('mytemplate',tmp)
 
+		2.
+		Vue.component('mytemplate',{
+		template:'<h1></h1>',
+		})
+
+		3.私有组件
+		Var v=new Vue({
+			el:'#app',
+			components:{
+				tmp:'<h1></h1>'
+			}
+		})
 
 2.组件的组织
 	为了能在模板中使用，这些组件必须先注册以便 Vue 能够识别。这里有两种组件的注册类型：全局注册和局部注册。至此，我们的组件都只是通过 Vue.component 全局注册的：
@@ -46,6 +70,21 @@
 	全局注册的组件可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中。
 
 3.通过 Prop 向子组件传递数据
+	子组件无法访问到parent component中的data和methods
+
+	1.To pass data to child component:
+		1) parent component pass data to child component through v-bind：“name=dataName”
+		2) define "name" in "props[]" 
+ 
+ 	组建中的data属性和props属性区别：
+ 		data为component本身所有
+ 		props为父组件传递而来的，且只可读不可写
+
+
+ 	2. To pass a method through child component and parent component:
+ 		1) use v-on（@）绑定 method 在child component中
+ 		2）this.$emit('method'，参数1，参数2.。。。。。)触发该方法
+
 	Props are custom attributes you can register on a component. When a value is passed to a prop attribute, it becomes a property on that component instance. To pass a title to our blog post component, we can include it in the list of props this component accepts, using a props option:
 	
 	Vue.component('blog-post', {

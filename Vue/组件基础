@@ -93,3 +93,23 @@
 	})
 	
 	
+
+
+Problem:
+	Changing the value in a child component won't change it in the parent component,
+
+    - Only the component can change it's own state
+    - Only the parent of the component can change the props
+    -to pass data back up the component tree, we use events.
+
+    When Vue re-renders your component — which happens every time something changes — it will overwrite any changes you have made to your props.
+
+
+Notes:
+1.situation：一个parent component包含几个v-for的child component：
+	- 更改其中一个child component的data，则更改的那个child发生改变
+	- 更改parent component中的data，则所有应用该data的child component发生改变
+
+
+
+

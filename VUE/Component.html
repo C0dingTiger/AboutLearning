@@ -17,34 +17,107 @@
 
 <div id='app'>
 
-<com1 v-bind:child="msg"></com1>
-	
+<father></father>
+
 </div>
 
 
+<template id='father'>
+	<div>
+		<!-- <button>Click</button> -->
+		<button @click="decide=!decide">Click</button>
+		<div v-if="decide">
+			<div v-for="num in arr">
+				<button @click="changefcv(num)">
+					<son :child="child" :num="num" :updateop="updateop" @fromchild="standup"></son>				
+				</button>
+				
+			</div>
+			
+		</div>
+	</div>
+</template>
+
+
+
+<template id='son'>
+	<div>
+<!-- 		<h1 @click="change"> this update status is ------{{updateop}}-------- {{pass}} </h1>
+
+		<h2 @click='soft'>this update status is ------{{updateop}}-------my slogon is {{self}}</h2>
+ -->
+		<h1 @click="soft"> this update status is ------{{updateop}}-------- {{pass}} -------And my slogon is {{self}}</h1>
+
+	</div>
+</template>
+
+<!-- 
+	to be test：
+		v-bind different situations
+		compute application
+
+
+ -->
+
 <script type="text/javascript">
+
+	Vue.component('son',{
+		props:['child','num','updateop'],
+
+		data(){
+			return{
+				pass:this.child,
+				self:"Never change!",
+			}
+		},
+
+		template:'#son',
+		
+		methods:{
+			change(){
+				this.pass=this.child
+				this.$emit('fromchild')
+			},
+			soft(){
+				this.self="Hello it's me....."
+				this.$emit('fromchild')
+			},
+
+		},
+	}),
+
+	Vue.component('father',{
+		template:'#father',
+
+		data(){
+			return{
+				child:"call me son",
+				decide:true,
+				arr:[1,2,3,4],
+				updateop:true,
+			}
+		},
+
+		methods:{
+			changefcv(item){
+				this.updateop=!this.updateop
+				console.log(item+"change father value is "+ this.updateop)
+			},
+			standup(){
+				this.child="I am your father!!!!!!"
+			}
+		},
+		computed:{
+			
+		},	
+	})
+
 	var app=new Vue({
 		el:'#app',
 		
-		data:{
-			msg:'parent',
-		},
-
-		components:{
-			com1:{
-				props:['child'],
-
-				template:'<h1 @click="change"> this is ------- {{child}} </h1>',
-				
-				methods:{
-					change(){
-						this.child='child'
-					}
-
-				},
-
-			},
-		},
+		// data:{
+		// 	msg:'parent',
+		// },
 
 	})
 

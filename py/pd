@@ -1,0 +1,37 @@
+Series：one-dimensional data structure that comprises of a key-value pair
+	Query:
+		To query a series, use .iloc[] or [] to query using the index/position of the value and .loc[] to query using the user-defined keys
+
+	Define keys:
+		eg. 
+			pd.Series([32.6, 34.1, 28.0, 35.9], index = ["a","b","c","d"])
+
+	Name:The name of the Series, also the column name if part of a DataFrame
+		eg.
+			pd.Series([1, 2, 3], dtype=np.int64, name='Numbers')
+
+
+
+Dataframe: two-dimensional data-structure that can be thought of as a spreadsheet
+	Query:
+		methods:
+			- use .iloc[] to query using the index/position of the value and .loc[] to query using the user-defined keys
+			- To query a column, use the indexing operator []
+		return:
+			-Querying a row or a column returns series, while querying a cell returns an object
+
+	Build DF:
+		by column:
+			eg:
+				fruits_jack = ["apples", "oranges", "bananas"]
+				fruits_john = ["guavas", "kiwis", "strawberries"]
+				index = ["a", "b", "c"]
+				all_fruits = {"Jack's": fruits_jack, "John's": fruits_john}
+				fruits = pd.DataFrame(all_fruits, index = index)
+				//reset index to conventional number
+				new_fruits = fruits.reset_index(drop = True)
+
+		by row:
+			eg.
+				df2 = pd.DataFrame([[2,3,4]], columns=['A','B','C'])
+				pd.concat([df2, df])

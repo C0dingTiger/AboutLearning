@@ -10,7 +10,9 @@ Series：one-dimensional data structure that comprises of a key-value pair
 		eg.
 			pd.Series([1, 2, 3], dtype=np.int64, name='Numbers')
 
-
+	Add value:
+		Series.append(to_append, ignore_index=False, verify_integrity=False)
+		pd.Series.append(value,ignore_index=True)
 
 Dataframe: two-dimensional data-structure that can be thought of as a spreadsheet
 	Query:
@@ -32,6 +34,11 @@ Dataframe: two-dimensional data-structure that can be thought of as a spreadshee
 				new_fruits = fruits.reset_index(drop = True)
 
 		by row:
+			1. 
+				//dictionary should have the same key as df's column name
+				dictionary={}
+				df.append(dictionary, ignore_index=False)
+
 			eg.
 				df2 = pd.DataFrame([[2,3,4]], columns=['A','B','C'])
 				pd.concat([df2, df])
